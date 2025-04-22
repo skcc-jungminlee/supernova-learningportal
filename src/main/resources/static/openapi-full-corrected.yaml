@@ -1,0 +1,1791 @@
+openapi: 3.0.3
+info:
+  title: "스포츠 e-러닝 포털 Open API"
+  version: 1.0.0
+  description: "\uC0AC\uC6A9\uC790 \uC778\uD130\uD398\uC774\uC2A4 \uC815\uC758\uC11C\
+    \uB97C \uAE30\uBC18\uC73C\uB85C \uD55C OpenAPI \uBA85\uC138\uC11C"
+servers:
+- url: https://api.example.com
+  description: "\uC6B4\uC601 \uC11C\uBC84"
+tags:
+- name: "\uC218\uAC15\uC2E0\uCCAD"
+- name: "\uD68C\uC6D0\uAC00\uC785"
+- name: "\uD504\uB85C\uADF8\uB7A8\uAD00\uB9AC"
+- name: "\uCF58\uD150\uCE20\uAD00\uB9AC"
+- name: "\uC2DC\uC124\uAD00\uB9AC"
+- name: "\uD3C9\uAC00\uAD00\uB9AC"
+- name: "\uD3EC\uD138\uAD00\uB9AC"
+- name: "\uACF5\uD1B5\uAD00\uB9AC"
+- name: "\uC815\uC0B0\uAD00\uB9AC"
+- name: "\uC5F0\uACC4\uAD00\uB9AC"
+paths:
+  /courses:
+    get:
+      tags:
+      - "\uC218\uAC15\uC2E0\uCCAD"
+      summary: "\uAD50\uC721\uACFC\uC815 \uBAA9\uB85D \uC870\uD68C"
+      operationId: getCourses
+      responses:
+        '200':
+          description: "\uC131\uACF5\uC801\uC73C\uB85C \uAD50\uC721\uACFC\uC815 \uBAA9\
+            \uB85D\uC744 \uBC18\uD658\uD569\uB2C8\uB2E4."
+  /enrollments/draft:
+    post:
+      tags:
+      - "\uC218\uAC15\uC2E0\uCCAD"
+      summary: "\uC218\uAC15\uC2E0\uCCAD\uC11C \uC784\uC2DC \uC800\uC7A5"
+      operationId: saveEnrollmentDraft
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrollmentDraft'
+      responses:
+        '200':
+          description: "\uC784\uC2DC \uC800\uC7A5 \uC644\uB8CC"
+  /enrollments/submit:
+    post:
+      tags:
+      - "\uC218\uAC15\uC2E0\uCCAD"
+      summary: "\uC218\uAC15\uC2E0\uCCAD\uC11C \uCD5C\uC885 \uC81C\uCD9C"
+      operationId: submitEnrollment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrollmentSubmit'
+      responses:
+        '200':
+          description: "\uC218\uAC15\uC2E0\uCCAD\uC774 \uC131\uACF5\uC801\uC73C\uB85C\
+            \ \uC81C\uCD9C\uB428"
+  /enrollments/status:
+    get:
+      tags:
+      - "\uC218\uAC15\uC2E0\uCCAD"
+      summary: "\uC218\uAC15\uC2E0\uCCAD \uC0C1\uD0DC \uD655\uC778"
+      operationId: getEnrollmentStatus
+      parameters:
+      - name: userId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: "\uC218\uAC15\uC2E0\uCCAD\uC790 ID"
+      responses:
+        '200':
+          description: "\uC218\uAC15\uC2E0\uCCAD \uC0C1\uD0DC \uBAA9\uB85D \uBC18\uD658"
+  /enrollments/{id}/cancel:
+    post:
+      tags:
+      - "\uC218\uAC15\uC2E0\uCCAD"
+      summary: "\uC218\uAC15\uC2E0\uCCAD \uCDE8\uC18C \uC694\uCCAD"
+      operationId: cancelEnrollment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: "\uC218\uAC15\uC2E0\uCCAD ID"
+      responses:
+        '200':
+          description: "\uC218\uAC15\uC2E0\uCCAD \uCDE8\uC18C \uC131\uACF5"
+  /members/signup/types:
+    get:
+      tags:
+      - "\uD68C\uC6D0\uAC00\uC785"
+      summary: "\uD68C\uC6D0\uC720\uD615 \uBAA9\uB85D \uC870\uD68C"
+      operationId: getSignupTypes
+      responses:
+        '200':
+          description: "\uD68C\uC6D0\uC720\uD615 \uBAA9\uB85D \uBC18\uD658"
+  /members/signup/basic-info:
+    post:
+      tags:
+      - "\uD68C\uC6D0\uAC00\uC785"
+      summary: "\uAE30\uBCF8\uC815\uBCF4 \uC785\uB825"
+      operationId: submitBasicInfo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BasicInfo'
+      responses:
+        '200':
+          description: "\uAE30\uBCF8\uC815\uBCF4 \uC800\uC7A5 \uC644\uB8CC"
+  /members/signup/agreements:
+    post:
+      tags:
+      - "\uD68C\uC6D0\uAC00\uC785"
+      summary: "\uC57D\uAD00 \uB3D9\uC758 \uC800\uC7A5"
+      operationId: submitAgreements
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgreementInfo'
+      responses:
+        '200':
+          description: "\uC57D\uAD00 \uB3D9\uC758 \uC800\uC7A5 \uC644\uB8CC"
+  /members/signup/verification:
+    post:
+      tags:
+      - "\uD68C\uC6D0\uAC00\uC785"
+      summary: "\uBCF8\uC778\uC778\uC99D \uC694\uCCAD"
+      operationId: verifyIdentity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerificationRequest'
+      responses:
+        '200':
+          description: "\uBCF8\uC778\uC778\uC99D \uC131\uACF5 \uB610\uB294 \uC2E4\uD328"
+  /members/signup/complete:
+    get:
+      tags:
+      - "\uD68C\uC6D0\uAC00\uC785"
+      summary: "\uD68C\uC6D0\uAC00\uC785 \uC644\uB8CC \uC815\uBCF4 \uC870\uD68C"
+      operationId: getSignupCompleteInfo
+      responses:
+        '200':
+          description: "\uD68C\uC6D0\uAC00\uC785 \uC644\uB8CC \uBA54\uC2DC\uC9C0 \uBC18\
+            \uD658"
+  /members/profile:
+    put:
+      tags:
+      - "\uD68C\uC6D0\uAC00\uC785"
+      summary: "\uD68C\uC6D0\uC815\uBCF4 \uC218\uC815"
+      operationId: updateMemberProfile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemberProfile'
+      responses:
+        '200':
+          description: "\uD68C\uC6D0\uC815\uBCF4 \uC218\uC815 \uC131\uACF5"
+  /members/profile/history:
+    get:
+      tags:
+      - "\uD68C\uC6D0\uAC00\uC785"
+      summary: "\uD68C\uC6D0\uC815\uBCF4 \uC218\uC815 \uC774\uB825 \uC870\uD68C"
+      operationId: getMemberProfileHistory
+      parameters:
+      - name: userId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: "\uD68C\uC6D0 ID"
+      responses:
+        '200':
+          description: "\uD68C\uC6D0\uC815\uBCF4 \uC218\uC815 \uC774\uB825 \uBC18\uD658"
+  /programs:
+    post:
+      tags:
+      - "\uD504\uB85C\uADF8\uB7A8\uAD00\uB9AC"
+      summary: "\uAD50\uC721 \uD504\uB85C\uADF8\uB7A8 \uB4F1\uB85D"
+      operationId: createProgram
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Program'
+      responses:
+        '200':
+          description: "\uAD50\uC721 \uD504\uB85C\uADF8\uB7A8 \uB4F1\uB85D \uC644\uB8CC"
+  /programs/{id}/deactivate:
+    post:
+      tags:
+      - "\uD504\uB85C\uADF8\uB7A8\uAD00\uB9AC"
+      summary: "\uAD50\uC721 \uD504\uB85C\uADF8\uB7A8 \uD3D0\uC9C0 \uC694\uCCAD"
+      operationId: deactivateProgram
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: "\uD504\uB85C\uADF8\uB7A8 ID"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+              required:
+              - reason
+      responses:
+        '200':
+          description: "\uD3D0\uC9C0 \uCC98\uB9AC \uC644\uB8CC"
+  /instructors/search:
+    get:
+      tags:
+      - "\uD504\uB85C\uADF8\uB7A8\uAD00\uB9AC"
+      summary: "\uAC15\uC0AC \uAC80\uC0C9"
+      operationId: searchInstructors
+      parameters:
+      - name: qualification
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: field
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: date
+        in: query
+        schema:
+          type: string
+          format: date
+        required: false
+      responses:
+        '200':
+          description: "\uAC80\uC0C9\uB41C \uAC15\uC0AC \uBAA9\uB85D \uBC18\uD658"
+  /instructors/assign:
+    post:
+      tags:
+      - "\uD504\uB85C\uADF8\uB7A8\uAD00\uB9AC"
+      summary: "\uAC15\uC0AC \uBC30\uC815"
+      operationId: assignInstructor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstructorAssignment'
+      responses:
+        '200':
+          description: "\uAC15\uC0AC \uBC30\uC815 \uC644\uB8CC"
+  /programs/{id}/schedule:
+    post:
+      tags:
+      - "\uD504\uB85C\uADF8\uB7A8\uAD00\uB9AC"
+      summary: "\uAD50\uC721 \uD504\uB85C\uADF8\uB7A8 \uC77C\uC815 \uC124\uC815"
+      operationId: setProgramSchedule
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: "\uD504\uB85C\uADF8\uB7A8 ID"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProgramSchedule'
+      responses:
+        '200':
+          description: "\uC77C\uC815 \uC124\uC815 \uC644\uB8CC"
+  /programs/{id}/mixed-mode:
+    post:
+      tags:
+      - "\uD504\uB85C\uADF8\uB7A8\uAD00\uB9AC"
+      summary: "\uD63C\uD569\uAD50\uC721 \uC6B4\uC601 \uC124\uC815"
+      operationId: setMixedModeProgram
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: "\uD504\uB85C\uADF8\uB7A8 ID"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MixedModeSettings'
+      responses:
+        '200':
+          description: "\uD63C\uD569\uAD50\uC721 \uC124\uC815 \uC644\uB8CC"
+  /contents:
+    post:
+      tags:
+      - "\uCF58\uD150\uCE20\uAD00\uB9AC"
+      summary: "\uCF58\uD150\uCE20 \uC5C5\uB85C\uB4DC"
+      operationId: uploadContent
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ContentUpload'
+      responses:
+        '200':
+          description: "\uCF58\uD150\uCE20 \uC5C5\uB85C\uB4DC \uC644\uB8CC"
+  /contents/{id}/modification-request:
+    put:
+      tags:
+      - "\uCF58\uD150\uCE20\uAD00\uB9AC"
+      summary: "\uCF58\uD150\uCE20 \uC218\uC815 \uC694\uCCAD"
+      operationId: requestContentModification
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: "\uCF58\uD150\uCE20 ID"
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ContentModificationRequest'
+      responses:
+        '200':
+          description: "\uCF58\uD150\uCE20 \uC218\uC815 \uC694\uCCAD \uB4F1\uB85D\
+            \ \uC644\uB8CC"
+  /contents/{id}/review:
+    put:
+      tags:
+      - "\uCF58\uD150\uCE20\uAD00\uB9AC"
+      summary: "\uCF58\uD150\uCE20 \uAC80\uC218 \uCC98\uB9AC"
+      operationId: reviewContent
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: "\uCF58\uD150\uCE20 ID"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentReview'
+      responses:
+        '200':
+          description: "\uCF58\uD150\uCE20 \uAC80\uC218 \uC644\uB8CC"
+  /contents/{id}/categories:
+    put:
+      tags:
+      - "\uCF58\uD150\uCE20\uAD00\uB9AC"
+      summary: "\uCF58\uD150\uCE20 \uBD84\uB958 \uC124\uC815"
+      operationId: setContentCategories
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: "\uCF58\uD150\uCE20 ID"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentCategories'
+      responses:
+        '200':
+          description: "\uCF58\uD150\uCE20 \uBD84\uB958 \uC124\uC815 \uC644\uB8CC"
+  /rooms:
+    post:
+      tags:
+      - "\uC2DC\uC124\uAD00\uB9AC"
+      summary: "\uAC15\uC758\uC2E4 \uC815\uBCF4 \uB4F1\uB85D"
+      operationId: registerRoom
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoomInfo'
+      responses:
+        '200':
+          description: "\uAC15\uC758\uC2E4 \uB4F1\uB85D \uC644\uB8CC"
+  /rooms/{id}/location:
+    get:
+      tags:
+      - "\uC2DC\uC124\uAD00\uB9AC"
+      summary: "\uAC15\uC758\uC2E4 \uC704\uCE58 \uC815\uBCF4 \uC81C\uACF5"
+      operationId: getRoomLocation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: "\uAC15\uC758\uC2E4 ID"
+      responses:
+        '200':
+          description: "\uAC15\uC758\uC2E4 \uC704\uCE58 \uC815\uBCF4 \uBC18\uD658"
+  /rooms/{id}/usage-info:
+    put:
+      tags:
+      - "\uC2DC\uC124\uAD00\uB9AC"
+      summary: "\uAC15\uC758\uC2E4 \uC774\uC6A9\uC548\uB0B4 \uC124\uC815"
+      operationId: setRoomUsageInfo
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: "\uAC15\uC758\uC2E4 ID"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoomUsageInfo'
+      responses:
+        '200':
+          description: "\uAC15\uC758\uC2E4 \uC774\uC6A9\uC548\uB0B4 \uC124\uC815 \uC644\
+            \uB8CC"
+  /reservations:
+    post:
+      tags:
+      - "\uC2DC\uC124\uAD00\uB9AC"
+      summary: "\uB300\uAD00 \uC2E0\uCCAD \uB4F1\uB85D"
+      operationId: createReservation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+      responses:
+        '200':
+          description: "\uB300\uAD00 \uC2E0\uCCAD\uC774 \uC131\uACF5\uC801\uC73C\uB85C\
+            \ \uB4F1\uB85D\uB428"
+  /reservations/{id}/status:
+    put:
+      tags:
+      - "\uC2DC\uC124\uAD00\uB9AC"
+      summary: "\uB300\uAD00 \uC608\uC57D \uC2B9\uC778 \uB610\uB294 \uBC18\uB824 \uCC98\
+        \uB9AC"
+      operationId: processReservationStatus
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: "\uB300\uAD00 \uC608\uC57D ID"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReservationStatusUpdate'
+      responses:
+        '200':
+          description: "\uB300\uAD00 \uC0C1\uD0DC \uBCC0\uACBD \uC644\uB8CC"
+  /reservations/status:
+    get:
+      tags:
+      - "\uC2DC\uC124\uAD00\uB9AC"
+      summary: "\uB300\uAD00 \uC774\uC6A9\uD604\uD669 \uC870\uD68C"
+      operationId: getReservationStatus
+      parameters:
+      - name: date
+        in: query
+        schema:
+          type: string
+          format: date
+        required: false
+        description: "\uC870\uD68C \uAE30\uC900 \uB0A0\uC9DC"
+      - name: roomId
+        in: query
+        schema:
+          type: string
+        required: false
+        description: "\uAC15\uC758\uC2E4 ID"
+      - name: status
+        in: query
+        schema:
+          type: string
+        required: false
+        description: "\uC608\uC57D \uC0C1\uD0DC \uD544\uD130"
+      responses:
+        '200':
+          description: "\uB300\uAD00 \uC774\uC6A9\uD604\uD669 \uBC18\uD658"
+  /certificates/download:
+    get:
+      tags:
+      - "\uC218\uAC15\uC2E0\uCCAD"
+      summary: "\uC218\uB8CC\uC99D PDF \uB2E4\uC6B4\uB85C\uB4DC"
+      operationId: downloadCertificate
+      parameters:
+      - name: courseId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: "\uC218\uB8CC\uD55C \uACFC\uC815 ID"
+      - name: userId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: "\uC0AC\uC6A9\uC790 ID"
+      responses:
+        '200':
+          description: "PDF \uC218\uB8CC\uC99D \uBC18\uD658"
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+  /surveys:
+    post:
+      tags:
+      - "\uD3C9\uAC00\uAD00\uB9AC"
+      summary: "\uC124\uBB38 \uB4F1\uB85D"
+      operationId: createSurvey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SurveyDefinition'
+      responses:
+        '200':
+          description: "\uC124\uBB38 \uB4F1\uB85D \uC644\uB8CC"
+  /surveys/{id}/responses:
+    post:
+      tags:
+      - "\uD3C9\uAC00\uAD00\uB9AC"
+      summary: "\uC124\uBB38 \uC751\uB2F5 \uC81C\uCD9C"
+      operationId: submitSurveyResponse
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: "\uC124\uBB38 ID"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SurveyResponse'
+      responses:
+        '200':
+          description: "\uC124\uBB38 \uC751\uB2F5 \uC81C\uCD9C \uC644\uB8CC"
+  /exams:
+    post:
+      tags:
+      - "\uD3C9\uAC00\uAD00\uB9AC"
+      summary: "\uC2DC\uD5D8 \uCD9C\uC81C"
+      operationId: createExam
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExamDefinition'
+      responses:
+        '200':
+          description: "\uC2DC\uD5D8 \uCD9C\uC81C \uC644\uB8CC"
+  /exams/{id}/submit:
+    post:
+      tags:
+      - "\uD3C9\uAC00\uAD00\uB9AC"
+      summary: "\uC2DC\uD5D8 \uC751\uC2DC \uC81C\uCD9C"
+      operationId: submitExam
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: "\uC2DC\uD5D8 ID"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExamSubmission'
+      responses:
+        '200':
+          description: "\uC2DC\uD5D8 \uC751\uC2DC \uC81C\uCD9C \uC644\uB8CC"
+  /exams/{id}/autograde:
+    post:
+      tags:
+      - "\uD3C9\uAC00\uAD00\uB9AC"
+      summary: "\uC2DC\uD5D8 \uC790\uB3D9 \uCC44\uC810"
+      operationId: autoGradeExam
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: "\uC2DC\uD5D8 ID"
+      responses:
+        '200':
+          description: "\uC790\uB3D9 \uCC44\uC810 \uACB0\uACFC \uBC18\uD658"
+  /exams/statistics:
+    get:
+      tags:
+      - "\uD3C9\uAC00\uAD00\uB9AC"
+      summary: "\uC2DC\uD5D8 \uD1B5\uACC4 \uC870\uD68C"
+      operationId: getExamStatistics
+      parameters:
+      - name: examId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: "\uC2DC\uD5D8 ID"
+      responses:
+        '200':
+          description: "\uC2DC\uD5D8 \uD1B5\uACC4 \uB370\uC774\uD130 \uBC18\uD658"
+  /mypage:
+    get:
+      tags:
+      - "\uD3EC\uD138\uAD00\uB9AC"
+      summary: "\uB9C8\uC774\uD398\uC774\uC9C0 \uC870\uD68C"
+      operationId: getMyPage
+      parameters:
+      - name: userId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: "\uC0AC\uC6A9\uC790 ID"
+      responses:
+        '200':
+          description: "\uB9C8\uC774\uD398\uC774\uC9C0 \uC815\uBCF4 \uBC18\uD658"
+  /instructors/apply:
+    post:
+      tags:
+      - "\uD3EC\uD138\uAD00\uB9AC"
+      summary: "\uAC15\uC0AC \uB4F1\uB85D \uC2E0\uCCAD"
+      operationId: applyInstructor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstructorApplication'
+      responses:
+        '200':
+          description: "\uAC15\uC0AC \uB4F1\uB85D \uC2E0\uCCAD \uC644\uB8CC"
+  /instructors/{id}/history:
+    get:
+      tags:
+      - "\uD3EC\uD138\uAD00\uB9AC"
+      summary: "\uAC15\uC0AC \uAC15\uC758 \uC774\uB825 \uC870\uD68C"
+      operationId: getInstructorHistory
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: "\uAC15\uC0AC ID"
+      responses:
+        '200':
+          description: "\uAC15\uC0AC \uAC15\uC758 \uC774\uB825 \uBC18\uD658"
+  /instructors/applications/{id}/status:
+    put:
+      tags:
+      - "\uD3EC\uD138\uAD00\uB9AC"
+      summary: "\uAC15\uC0AC \uC2B9\uC778 \uB610\uB294 \uBC18\uB824 \uCC98\uB9AC"
+      operationId: updateInstructorApplicationStatus
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: "\uAC15\uC0AC \uC2E0\uCCAD ID"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstructorApproval'
+      responses:
+        '200':
+          description: "\uAC15\uC0AC \uC2E0\uCCAD \uC0C1\uD0DC \uBCC0\uACBD \uC644\
+            \uB8CC"
+  /notices:
+    post:
+      tags:
+      - "\uD3EC\uD138\uAD00\uB9AC"
+      summary: "\uACF5\uC9C0\uC0AC\uD56D \uB4F1\uB85D"
+      operationId: createNotice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Notice'
+      responses:
+        '200':
+          description: "\uACF5\uC9C0\uC0AC\uD56D \uB4F1\uB85D \uC644\uB8CC"
+    get:
+      tags:
+      - "\uD3EC\uD138\uAD00\uB9AC"
+      summary: "\uACF5\uC9C0\uC0AC\uD56D \uBAA9\uB85D \uC870\uD68C"
+      operationId: listNotices
+      parameters:
+      - name: keyword
+        in: query
+        schema:
+          type: string
+        required: false
+        description: "\uAC80\uC0C9 \uD0A4\uC6CC\uB4DC"
+      responses:
+        '200':
+          description: "\uACF5\uC9C0\uC0AC\uD56D \uBAA9\uB85D \uBC18\uD658"
+  /contents/request:
+    post:
+      tags:
+      - "\uCF58\uD150\uCE20\uAD00\uB9AC"
+      summary: "\uD76C\uB9DD \uCF58\uD150\uCE20 \uC2E0\uCCAD"
+      operationId: requestDesiredContent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DesiredContentRequest'
+      responses:
+        '200':
+          description: "\uD76C\uB9DD \uCF58\uD150\uCE20 \uC2E0\uCCAD \uC644\uB8CC"
+  /faqs:
+    post:
+      tags:
+      - "\uD3EC\uD138\uAD00\uB9AC"
+      summary: "FAQ \uB4F1\uB85D"
+      operationId: createFaq
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Faq'
+      responses:
+        '200':
+          description: "FAQ \uB4F1\uB85D \uC644\uB8CC"
+    get:
+      tags:
+      - "\uD3EC\uD138\uAD00\uB9AC"
+      summary: "FAQ \uBAA9\uB85D \uC870\uD68C"
+      operationId: listFaqs
+      parameters:
+      - name: keyword
+        in: query
+        schema:
+          type: string
+        required: false
+        description: "\uAC80\uC0C9 \uD0A4\uC6CC\uB4DC"
+      responses:
+        '200':
+          description: "FAQ \uBAA9\uB85D \uBC18\uD658"
+  /system-config/ui-elements:
+    post:
+      tags:
+      - "\uACF5\uD1B5\uAD00\uB9AC"
+      summary: "UI \uC694\uC18C(\uBA54\uB274/\uD31D\uC5C5/\uC57D\uAD00) \uB4F1\uB85D"
+      operationId: registerUiElement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UiElement'
+      responses:
+        '200':
+          description: "UI \uC694\uC18C \uB4F1\uB85D \uC644\uB8CC"
+  /permissions:
+    post:
+      tags:
+      - "\uACF5\uD1B5\uAD00\uB9AC"
+      summary: "\uAD8C\uD55C \uC124\uC815 \uC694\uCCAD"
+      operationId: requestPermission
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PermissionRequest'
+      responses:
+        '200':
+          description: "\uAD8C\uD55C \uC124\uC815 \uC694\uCCAD \uC644\uB8CC"
+  /permissions/{id}/status:
+    put:
+      tags:
+      - "\uACF5\uD1B5\uAD00\uB9AC"
+      summary: "\uAD8C\uD55C \uC2B9\uC778/\uBC18\uB824 \uCC98\uB9AC"
+      operationId: processPermissionStatus
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: "\uAD8C\uD55C \uC694\uCCAD ID"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PermissionApproval'
+      responses:
+        '200':
+          description: "\uAD8C\uD55C \uC0C1\uD0DC \uBCC0\uACBD \uC644\uB8CC"
+  /codes:
+    post:
+      tags:
+      - "\uACF5\uD1B5\uAD00\uB9AC"
+      summary: "\uACF5\uD1B5 \uCF54\uB4DC \uB4F1\uB85D"
+      operationId: createCode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommonCode'
+      responses:
+        '200':
+          description: "\uACF5\uD1B5 \uCF54\uB4DC \uB4F1\uB85D \uC644\uB8CC"
+  /codes/{id}:
+    put:
+      tags:
+      - "\uACF5\uD1B5\uAD00\uB9AC"
+      summary: "\uACF5\uD1B5 \uCF54\uB4DC \uC218\uC815"
+      operationId: updateCode
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: "\uCF54\uB4DC ID"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommonCode'
+      responses:
+        '200':
+          description: "\uACF5\uD1B5 \uCF54\uB4DC \uC218\uC815 \uC644\uB8CC"
+    delete:
+      tags:
+      - "\uACF5\uD1B5\uAD00\uB9AC"
+      summary: "\uACF5\uD1B5 \uCF54\uB4DC \uC0AD\uC81C"
+      operationId: deleteCode
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: "\uCF54\uB4DC ID"
+      responses:
+        '200':
+          description: "\uACF5\uD1B5 \uCF54\uB4DC \uC0AD\uC81C \uC644\uB8CC"
+  /notifications/sms:
+    post:
+      tags:
+      - "\uACF5\uD1B5\uAD00\uB9AC"
+      summary: "SMS \uBC1C\uC1A1 \uC694\uCCAD"
+      operationId: sendSms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SmsRequest'
+      responses:
+        '200':
+          description: "SMS \uBC1C\uC1A1 \uC694\uCCAD \uC644\uB8CC"
+  /notifications/sms/history:
+    get:
+      tags:
+      - "\uACF5\uD1B5\uAD00\uB9AC"
+      summary: "SMS \uBC1C\uC1A1 \uC774\uB825 \uC870\uD68C"
+      operationId: getSmsHistory
+      parameters:
+      - name: phoneNumber
+        in: query
+        schema:
+          type: string
+        required: false
+        description: "\uC218\uC2E0\uC790 \uC804\uD654\uBC88\uD638"
+      - name: date
+        in: query
+        schema:
+          type: string
+          format: date
+        required: false
+        description: "\uBC1C\uC1A1 \uC77C\uC790"
+      responses:
+        '200':
+          description: "SMS \uBC1C\uC1A1 \uC774\uB825 \uBC18\uD658"
+  /payments/enrollments:
+    post:
+      tags:
+      - "\uC815\uC0B0\uAD00\uB9AC"
+      summary: "\uC218\uAC15\uC2E0\uCCAD \uACB0\uC81C \uCC98\uB9AC"
+      operationId: processEnrollmentPayment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrollmentPayment'
+      responses:
+        '200':
+          description: "\uACB0\uC81C \uCC98\uB9AC \uC644\uB8CC"
+  /payments/enrollments/{id}/refund:
+    post:
+      tags:
+      - "\uC815\uC0B0\uAD00\uB9AC"
+      summary: "\uC218\uAC15\uC2E0\uCCAD \uD658\uBD88 \uC694\uCCAD \uBC0F \uCC98\uB9AC"
+      operationId: requestEnrollmentRefund
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: "\uC218\uAC15\uC2E0\uCCAD ID"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefundRequest'
+      responses:
+        '200':
+          description: "\uD658\uBD88 \uC694\uCCAD \uBC0F \uCC98\uB9AC \uC644\uB8CC"
+  /settlements/instructors:
+    post:
+      tags:
+      - "\uC815\uC0B0\uAD00\uB9AC"
+      summary: "\uAC15\uC0AC\uBE44 \uC815\uC0B0 \uB4F1\uB85D"
+      operationId: registerInstructorSettlement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstructorSettlement'
+      responses:
+        '200':
+          description: "\uAC15\uC0AC\uBE44 \uC815\uC0B0 \uB4F1\uB85D \uC644\uB8CC"
+  /integration/members/sync:
+    post:
+      tags:
+      - "\uC5F0\uACC4\uAD00\uB9AC"
+      summary: "\uD1B5\uD569\uD68C\uC6D0 \uC815\uBCF4 \uC5F0\uACC4 \uB3D9\uAE30\uD654"
+      operationId: syncMemberInfo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                memberId:
+                  type: string
+                externalSystem:
+                  type: string
+                syncedAt:
+                  type: string
+                  format: date-time
+              required:
+              - memberId
+              - externalSystem
+      responses:
+        '200':
+          description: "\uC5F0\uACC4 \uC131\uACF5"
+  /integration/courses/sync:
+    post:
+      tags:
+      - "\uC5F0\uACC4\uAD00\uB9AC"
+      summary: "\uC678\uBD80 \uAD50\uC721\uACFC\uC815 \uC815\uBCF4 \uC5F0\uACC4"
+      operationId: syncExternalCourse
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                externalCourseId:
+                  type: string
+                courseName:
+                  type: string
+                provider:
+                  type: string
+                duration:
+                  type: string
+              required:
+              - externalCourseId
+              - courseName
+      responses:
+        '200':
+          description: "\uC5F0\uACC4 \uC131\uACF5"
+  /integration/completions:
+    post:
+      tags:
+      - "\uC5F0\uACC4\uAD00\uB9AC"
+      summary: "\uAD50\uC721\uC218\uB8CC \uC815\uBCF4 \uC678\uBD80 \uC804\uC1A1"
+      operationId: sendCompletionRecord
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                courseId:
+                  type: string
+                completedAt:
+                  type: string
+                  format: date-time
+              required:
+              - userId
+              - courseId
+              - completedAt
+      responses:
+        '200':
+          description: "\uC804\uC1A1 \uC131\uACF5"
+  /integration/certificates/request:
+    post:
+      tags:
+      - "\uC5F0\uACC4\uAD00\uB9AC"
+      summary: "\uC218\uB8CC\uC99D \uC2E0\uCCAD \uC5F0\uACC4"
+      operationId: requestCertificateIssue
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                courseId:
+                  type: string
+                requestedAt:
+                  type: string
+                  format: date-time
+              required:
+              - userId
+              - courseId
+      responses:
+        '200':
+          description: "\uC2E0\uCCAD \uC644\uB8CC"
+  /integration/certificates/history:
+    post:
+      tags:
+      - "\uC5F0\uACC4\uAD00\uB9AC"
+      summary: "\uC218\uB8CC\uC99D \uBC1C\uAE09 \uC774\uB825 \uC218\uC2E0"
+      operationId: receiveCertificateHistory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                certificateId:
+                  type: string
+                userId:
+                  type: string
+                issuedAt:
+                  type: string
+                  format: date-time
+              required:
+              - certificateId
+              - userId
+      responses:
+        '200':
+          description: "\uC774\uB825 \uC218\uC2E0 \uC644\uB8CC"
+components:
+  schemas:
+    EnrollmentDraft:
+      type: object
+      properties:
+        name:
+          type: string
+        phoneNumber:
+          type: string
+        email:
+          type: string
+        courseName:
+          type: string
+        motivation:
+          type: string
+      required:
+      - name
+      - phoneNumber
+      - email
+      - courseName
+    EnrollmentSubmit:
+      type: object
+      properties:
+        draftId:
+          type: string
+        confirmation:
+          type: boolean
+      required:
+      - draftId
+    BasicInfo:
+      type: object
+      properties:
+        name:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        phoneNumber:
+          type: string
+        email:
+          type: string
+      required:
+      - name
+      - birthDate
+      - phoneNumber
+      - email
+    AgreementInfo:
+      type: object
+      properties:
+        requiredAgreements:
+          type: array
+          items:
+            type: string
+        optionalAgreements:
+          type: array
+          items:
+            type: string
+      required:
+      - requiredAgreements
+    VerificationRequest:
+      type: object
+      properties:
+        method:
+          type: string
+          enum:
+          - PASS
+          - CERTIFICATE
+        name:
+          type: string
+        phoneNumber:
+          type: string
+      required:
+      - method
+      - name
+      - phoneNumber
+    MemberProfile:
+      type: object
+      properties:
+        phoneNumber:
+          type: string
+        email:
+          type: string
+      required:
+      - phoneNumber
+      - email
+    Program:
+      type: object
+      properties:
+        programName:
+          type: string
+        targetGroup:
+          type: string
+        programType:
+          type: string
+        round:
+          type: integer
+        location:
+          type: string
+        fee:
+          type: number
+      required:
+      - programName
+      - targetGroup
+      - programType
+      - round
+      - fee
+    InstructorAssignment:
+      type: object
+      properties:
+        programId:
+          type: string
+        instructorId:
+          type: string
+      required:
+      - programId
+      - instructorId
+    ProgramSchedule:
+      type: object
+      properties:
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        days:
+          type: array
+          items:
+            type: string
+        time:
+          type: string
+        roomId:
+          type: string
+      required:
+      - startDate
+      - endDate
+      - days
+      - time
+    MixedModeSettings:
+      type: object
+      properties:
+        mode:
+          type: string
+          enum:
+          - ONLINE_ONLY
+          - OFFLINE_ONLY
+          - MIXED
+        onlineContentId:
+          type: string
+        offlineSchedule:
+          type: object
+          properties:
+            startDate:
+              type: string
+              format: date
+            endDate:
+              type: string
+              format: date
+            time:
+              type: string
+        attendanceRate:
+          type: integer
+        progressRate:
+          type: integer
+        completionConditions:
+          type: string
+      required:
+      - mode
+      - completionConditions
+    ContentUpload:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        version:
+          type: string
+        file:
+          type: string
+          format: binary
+      required:
+      - title
+      - file
+    ContentModificationRequest:
+      type: object
+      properties:
+        reason:
+          type: string
+        file:
+          type: string
+          format: binary
+      required:
+      - reason
+    ContentReview:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - APPROVED
+          - REJECTED
+        reason:
+          type: string
+      required:
+      - status
+    ContentCategories:
+      type: object
+      properties:
+        type:
+          type: string
+          description: "\uC608: \uAE30\uCD08, \uC2EC\uD654"
+        field:
+          type: string
+          description: "\uC608: \uC9C0\uB3C4\uC790, \uC2EC\uD310"
+        targetLevel:
+          type: string
+          description: "\uC608: \uCD08\uAE09, \uC911\uAE09, \uACE0\uAE09"
+      required:
+      - type
+      - field
+      - targetLevel
+    RoomInfo:
+      type: object
+      properties:
+        name:
+          type: string
+        location:
+          type: string
+        capacity:
+          type: integer
+        usageType:
+          type: string
+          description: "\uC608: \uC77C\uBC18 \uAC15\uC758, \uC2E4\uC2B5\uC2E4 \uB4F1"
+      required:
+      - name
+      - location
+      - capacity
+      - usageType
+    RoomUsageInfo:
+      type: object
+      properties:
+        availableDays:
+          type: array
+          items:
+            type: string
+        availableTime:
+          type: string
+        notes:
+          type: string
+      required:
+      - availableDays
+      - availableTime
+    ReservationRequest:
+      type: object
+      properties:
+        roomId:
+          type: string
+        applicantName:
+          type: string
+        applicantContact:
+          type: string
+        startDateTime:
+          type: string
+          format: date-time
+        endDateTime:
+          type: string
+          format: date-time
+        applicantType:
+          type: string
+          enum:
+          - INTERNAL
+          - EXTERNAL
+      required:
+      - roomId
+      - applicantName
+      - startDateTime
+      - endDateTime
+    ReservationStatusUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - APPROVED
+          - REJECTED
+        reason:
+          type: string
+      required:
+      - status
+    SurveyDefinition:
+      type: object
+      properties:
+        title:
+          type: string
+        questions:
+          type: array
+          items:
+            type: object
+            properties:
+              questionText:
+                type: string
+              type:
+                type: string
+                enum:
+                - TEXT
+                - CHOICE
+                - MULTICHOICE
+              options:
+                type: array
+                items:
+                  type: string
+            required:
+            - questionText
+            - type
+      required:
+      - title
+      - questions
+    SurveyResponse:
+      type: object
+      properties:
+        answers:
+          type: array
+          items:
+            type: object
+            properties:
+              questionId:
+                type: string
+              answer:
+                type: string
+            required:
+            - questionId
+            - answer
+      required:
+      - answers
+    ExamDefinition:
+      type: object
+      properties:
+        title:
+          type: string
+        courseId:
+          type: string
+        durationMinutes:
+          type: integer
+        questions:
+          type: array
+          items:
+            type: object
+            properties:
+              questionText:
+                type: string
+              type:
+                type: string
+                enum:
+                - MULTIPLE_CHOICE
+                - SUBJECTIVE
+              options:
+                type: array
+                items:
+                  type: string
+              answer:
+                type: string
+            required:
+            - questionText
+            - type
+      required:
+      - title
+      - courseId
+      - questions
+    ExamSubmission:
+      type: object
+      properties:
+        answers:
+          type: array
+          items:
+            type: object
+            properties:
+              questionId:
+                type: string
+              answer:
+                type: string
+            required:
+            - questionId
+            - answer
+      required:
+      - answers
+    InstructorApplication:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        phoneNumber:
+          type: string
+        specialty:
+          type: string
+        career:
+          type: string
+        certificateFileUrl:
+          type: string
+      required:
+      - name
+      - email
+      - phoneNumber
+      - specialty
+    InstructorApproval:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - APPROVED
+          - REJECTED
+        reason:
+          type: string
+      required:
+      - status
+    Notice:
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+        writer:
+          type: string
+        attachments:
+          type: array
+          items:
+            type: string
+      required:
+      - title
+      - content
+      - writer
+    DesiredContentRequest:
+      type: object
+      properties:
+        title:
+          type: string
+        field:
+          type: string
+        reason:
+          type: string
+        expectedUse:
+          type: string
+      required:
+      - title
+      - field
+      - reason
+    Faq:
+      type: object
+      properties:
+        question:
+          type: string
+        answer:
+          type: string
+        category:
+          type: string
+      required:
+      - question
+      - answer
+    UiElement:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - MENU
+          - POPUP
+          - TERMS
+        title:
+          type: string
+        content:
+          type: string
+        displayOrder:
+          type: integer
+        isActive:
+          type: boolean
+      required:
+      - type
+      - title
+      - content
+    PermissionRequest:
+      type: object
+      properties:
+        userId:
+          type: string
+        role:
+          type: string
+        requestedBy:
+          type: string
+      required:
+      - userId
+      - role
+    PermissionApproval:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - APPROVED
+          - REJECTED
+        reason:
+          type: string
+      required:
+      - status
+    CommonCode:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        group:
+          type: string
+        description:
+          type: string
+        isActive:
+          type: boolean
+      required:
+      - code
+      - name
+      - group
+    SmsRequest:
+      type: object
+      properties:
+        phoneNumber:
+          type: string
+        message:
+          type: string
+      required:
+      - phoneNumber
+      - message
+    EnrollmentPayment:
+      type: object
+      properties:
+        enrollmentId:
+          type: string
+        amount:
+          type: number
+        paymentMethod:
+          type: string
+          enum:
+          - CARD
+          - BANK_TRANSFER
+          - MOBILE
+        payerName:
+          type: string
+      required:
+      - enrollmentId
+      - amount
+      - paymentMethod
+    RefundRequest:
+      type: object
+      properties:
+        reason:
+          type: string
+        bankAccount:
+          type: string
+        refundAmount:
+          type: number
+      required:
+      - reason
+      - refundAmount
+    InstructorSettlement:
+      type: object
+      properties:
+        instructorId:
+          type: string
+        programId:
+          type: string
+        amount:
+          type: number
+        paymentDate:
+          type: string
+          format: date
+      required:
+      - instructorId
+      - programId
+      - amount
+    MemberSyncRequest:
+      type: object
+      properties:
+        memberId:
+          type: string
+        externalSystemId:
+          type: string
+        syncTimestamp:
+          type: string
+          format: date-time
+      required:
+      - memberId
+      - externalSystemId
+    ExternalCourseSync:
+      type: object
+      properties:
+        externalCourseId:
+          type: string
+        title:
+          type: string
+        provider:
+          type: string
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+      required:
+      - externalCourseId
+      - title
+      - provider
+    CompletionInfo:
+      type: object
+      properties:
+        userId:
+          type: string
+        courseId:
+          type: string
+        completedAt:
+          type: string
+          format: date-time
+        score:
+          type: number
+      required:
+      - userId
+      - courseId
+      - completedAt
+    CertificateRequest:
+      type: object
+      properties:
+        userId:
+          type: string
+        courseId:
+          type: string
+        issueDate:
+          type: string
+          format: date
+      required:
+      - userId
+      - courseId
+      - issueDate
+    CertificateHistory:
+      type: object
+      properties:
+        certificateId:
+          type: string
+        userId:
+          type: string
+        courseId:
+          type: string
+        issuedAt:
+          type: string
+          format: date-time
+      required:
+      - certificateId
+      - userId
+      - courseId
+      - issuedAt
+  responses: {}
+  parameters: {}
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

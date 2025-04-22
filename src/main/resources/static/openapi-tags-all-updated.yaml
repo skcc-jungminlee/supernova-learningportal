@@ -1,0 +1,1782 @@
+components:
+  parameters: {}
+  responses: {}
+  schemas:
+    AgreementInfo:
+      properties:
+        optionalAgreements:
+          items:
+            type: string
+          type: array
+        requiredAgreements:
+          items:
+            type: string
+          type: array
+      required:
+      - requiredAgreements
+      type: object
+    BasicInfo:
+      properties:
+        birthDate:
+          format: date
+          type: string
+        email:
+          type: string
+        name:
+          type: string
+        phoneNumber:
+          type: string
+      required:
+      - name
+      - birthDate
+      - phoneNumber
+      - email
+      type: object
+    CertificateHistory:
+      properties:
+        certificateId:
+          type: string
+        courseId:
+          type: string
+        issuedAt:
+          format: date-time
+          type: string
+        userId:
+          type: string
+      required:
+      - certificateId
+      - userId
+      - courseId
+      - issuedAt
+      type: object
+    CertificateRequest:
+      properties:
+        courseId:
+          type: string
+        issueDate:
+          format: date
+          type: string
+        userId:
+          type: string
+      required:
+      - userId
+      - courseId
+      - issueDate
+      type: object
+    CommonCode:
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+        group:
+          type: string
+        isActive:
+          type: boolean
+        name:
+          type: string
+      required:
+      - code
+      - name
+      - group
+      type: object
+    CompletionInfo:
+      properties:
+        completedAt:
+          format: date-time
+          type: string
+        courseId:
+          type: string
+        score:
+          type: number
+        userId:
+          type: string
+      required:
+      - userId
+      - courseId
+      - completedAt
+      type: object
+    ContentCategories:
+      properties:
+        field:
+          description: '예: 지도자, 심판'
+          type: string
+        targetLevel:
+          description: '예: 초급, 중급, 고급'
+          type: string
+        type:
+          description: '예: 기초, 심화'
+          type: string
+      required:
+      - type
+      - field
+      - targetLevel
+      type: object
+    ContentModificationRequest:
+      properties:
+        file:
+          format: binary
+          type: string
+        reason:
+          type: string
+      required:
+      - reason
+      type: object
+    ContentReview:
+      properties:
+        reason:
+          type: string
+        status:
+          enum:
+          - APPROVED
+          - REJECTED
+          type: string
+      required:
+      - status
+      type: object
+    ContentUpload:
+      properties:
+        description:
+          type: string
+        file:
+          format: binary
+          type: string
+        title:
+          type: string
+        version:
+          type: string
+      required:
+      - title
+      - file
+      type: object
+    DesiredContentRequest:
+      properties:
+        expectedUse:
+          type: string
+        field:
+          type: string
+        reason:
+          type: string
+        title:
+          type: string
+      required:
+      - title
+      - field
+      - reason
+      type: object
+    EnrollmentDraft:
+      properties:
+        courseName:
+          type: string
+        email:
+          type: string
+        motivation:
+          type: string
+        name:
+          type: string
+        phoneNumber:
+          type: string
+      required:
+      - name
+      - phoneNumber
+      - email
+      - courseName
+      type: object
+    EnrollmentPayment:
+      properties:
+        amount:
+          type: number
+        enrollmentId:
+          type: string
+        payerName:
+          type: string
+        paymentMethod:
+          enum:
+          - CARD
+          - BANK_TRANSFER
+          - MOBILE
+          type: string
+      required:
+      - enrollmentId
+      - amount
+      - paymentMethod
+      type: object
+    EnrollmentSubmit:
+      properties:
+        confirmation:
+          type: boolean
+        draftId:
+          type: string
+      required:
+      - draftId
+      type: object
+    ExamDefinition:
+      properties:
+        courseId:
+          type: string
+        durationMinutes:
+          type: integer
+        questions:
+          items:
+            properties:
+              answer:
+                type: string
+              options:
+                items:
+                  type: string
+                type: array
+              questionText:
+                type: string
+              type:
+                enum:
+                - MULTIPLE_CHOICE
+                - SUBJECTIVE
+                type: string
+            required:
+            - questionText
+            - type
+            type: object
+          type: array
+        title:
+          type: string
+      required:
+      - title
+      - courseId
+      - questions
+      type: object
+    ExamSubmission:
+      properties:
+        answers:
+          items:
+            properties:
+              answer:
+                type: string
+              questionId:
+                type: string
+            required:
+            - questionId
+            - answer
+            type: object
+          type: array
+      required:
+      - answers
+      type: object
+    ExternalCourseSync:
+      properties:
+        endDate:
+          format: date
+          type: string
+        externalCourseId:
+          type: string
+        provider:
+          type: string
+        startDate:
+          format: date
+          type: string
+        title:
+          type: string
+      required:
+      - externalCourseId
+      - title
+      - provider
+      type: object
+    Faq:
+      properties:
+        answer:
+          type: string
+        category:
+          type: string
+        question:
+          type: string
+      required:
+      - question
+      - answer
+      type: object
+    InstructorApplication:
+      properties:
+        career:
+          type: string
+        certificateFileUrl:
+          type: string
+        email:
+          type: string
+        name:
+          type: string
+        phoneNumber:
+          type: string
+        specialty:
+          type: string
+      required:
+      - name
+      - email
+      - phoneNumber
+      - specialty
+      type: object
+    InstructorApproval:
+      properties:
+        reason:
+          type: string
+        status:
+          enum:
+          - APPROVED
+          - REJECTED
+          type: string
+      required:
+      - status
+      type: object
+    InstructorAssignment:
+      properties:
+        instructorId:
+          type: string
+        programId:
+          type: string
+      required:
+      - programId
+      - instructorId
+      type: object
+    InstructorSettlement:
+      properties:
+        amount:
+          type: number
+        instructorId:
+          type: string
+        paymentDate:
+          format: date
+          type: string
+        programId:
+          type: string
+      required:
+      - instructorId
+      - programId
+      - amount
+      type: object
+    MemberProfile:
+      properties:
+        email:
+          type: string
+        phoneNumber:
+          type: string
+      required:
+      - phoneNumber
+      - email
+      type: object
+    MemberSyncRequest:
+      properties:
+        externalSystemId:
+          type: string
+        memberId:
+          type: string
+        syncTimestamp:
+          format: date-time
+          type: string
+      required:
+      - memberId
+      - externalSystemId
+      type: object
+    MixedModeSettings:
+      properties:
+        attendanceRate:
+          type: integer
+        completionConditions:
+          type: string
+        mode:
+          enum:
+          - ONLINE_ONLY
+          - OFFLINE_ONLY
+          - MIXED
+          type: string
+        offlineSchedule:
+          properties:
+            endDate:
+              format: date
+              type: string
+            startDate:
+              format: date
+              type: string
+            time:
+              type: string
+          type: object
+        onlineContentId:
+          type: string
+        progressRate:
+          type: integer
+      required:
+      - mode
+      - completionConditions
+      type: object
+    Notice:
+      properties:
+        attachments:
+          items:
+            type: string
+          type: array
+        content:
+          type: string
+        title:
+          type: string
+        writer:
+          type: string
+      required:
+      - title
+      - content
+      - writer
+      type: object
+    PermissionApproval:
+      properties:
+        reason:
+          type: string
+        status:
+          enum:
+          - APPROVED
+          - REJECTED
+          type: string
+      required:
+      - status
+      type: object
+    PermissionRequest:
+      properties:
+        requestedBy:
+          type: string
+        role:
+          type: string
+        userId:
+          type: string
+      required:
+      - userId
+      - role
+      type: object
+    Program:
+      properties:
+        fee:
+          type: number
+        location:
+          type: string
+        programName:
+          type: string
+        programType:
+          type: string
+        round:
+          type: integer
+        targetGroup:
+          type: string
+      required:
+      - programName
+      - targetGroup
+      - programType
+      - round
+      - fee
+      type: object
+    ProgramSchedule:
+      properties:
+        days:
+          items:
+            type: string
+          type: array
+        endDate:
+          format: date
+          type: string
+        roomId:
+          type: string
+        startDate:
+          format: date
+          type: string
+        time:
+          type: string
+      required:
+      - startDate
+      - endDate
+      - days
+      - time
+      type: object
+    RefundRequest:
+      properties:
+        bankAccount:
+          type: string
+        reason:
+          type: string
+        refundAmount:
+          type: number
+      required:
+      - reason
+      - refundAmount
+      type: object
+    ReservationRequest:
+      properties:
+        applicantContact:
+          type: string
+        applicantName:
+          type: string
+        applicantType:
+          enum:
+          - INTERNAL
+          - EXTERNAL
+          type: string
+        endDateTime:
+          format: date-time
+          type: string
+        roomId:
+          type: string
+        startDateTime:
+          format: date-time
+          type: string
+      required:
+      - roomId
+      - applicantName
+      - startDateTime
+      - endDateTime
+      type: object
+    ReservationStatusUpdate:
+      properties:
+        reason:
+          type: string
+        status:
+          enum:
+          - APPROVED
+          - REJECTED
+          type: string
+      required:
+      - status
+      type: object
+    RoomInfo:
+      properties:
+        capacity:
+          type: integer
+        location:
+          type: string
+        name:
+          type: string
+        usageType:
+          description: '예: 일반 강의, 실습실 등'
+          type: string
+      required:
+      - name
+      - location
+      - capacity
+      - usageType
+      type: object
+    RoomUsageInfo:
+      properties:
+        availableDays:
+          items:
+            type: string
+          type: array
+        availableTime:
+          type: string
+        notes:
+          type: string
+      required:
+      - availableDays
+      - availableTime
+      type: object
+    SmsRequest:
+      properties:
+        message:
+          type: string
+        phoneNumber:
+          type: string
+      required:
+      - phoneNumber
+      - message
+      type: object
+    SurveyDefinition:
+      properties:
+        questions:
+          items:
+            properties:
+              options:
+                items:
+                  type: string
+                type: array
+              questionText:
+                type: string
+              type:
+                enum:
+                - TEXT
+                - CHOICE
+                - MULTICHOICE
+                type: string
+            required:
+            - questionText
+            - type
+            type: object
+          type: array
+        title:
+          type: string
+      required:
+      - title
+      - questions
+      type: object
+    SurveyResponse:
+      properties:
+        answers:
+          items:
+            properties:
+              answer:
+                type: string
+              questionId:
+                type: string
+            required:
+            - questionId
+            - answer
+            type: object
+          type: array
+      required:
+      - answers
+      type: object
+    UiElement:
+      properties:
+        content:
+          type: string
+        displayOrder:
+          type: integer
+        isActive:
+          type: boolean
+        title:
+          type: string
+        type:
+          enum:
+          - MENU
+          - POPUP
+          - TERMS
+          type: string
+      required:
+      - type
+      - title
+      - content
+      type: object
+    VerificationRequest:
+      properties:
+        method:
+          enum:
+          - PASS
+          - CERTIFICATE
+          type: string
+        name:
+          type: string
+        phoneNumber:
+          type: string
+      required:
+      - method
+      - name
+      - phoneNumber
+      type: object
+  securitySchemes:
+    BearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+info:
+  description: 사용자 인터페이스 정의서를 기반으로 한 OpenAPI 명세서
+  title: 스포츠 e-러닝 포털 Open API
+  version: 1.0.0
+openapi: 3.0.3
+paths:
+  /certificates/download:
+    get:
+      operationId: downloadCertificate
+      parameters:
+      - description: 수료한 과정 ID
+        in: query
+        name: courseId
+        required: true
+        schema:
+          type: string
+      - description: 사용자 ID
+        in: query
+        name: userId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/pdf:
+              schema:
+                format: binary
+                type: string
+          description: PDF 수료증 반환
+      summary: 수료증 PDF 다운로드
+      tags:
+      - Course Enrollment
+  /codes:
+    post:
+      operationId: createCode
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommonCode'
+        required: true
+      responses:
+        '200':
+          description: 공통 코드 등록 완료
+      summary: 공통 코드 등록
+      tags:
+      - Common Management
+  /codes/{id}:
+    delete:
+      operationId: deleteCode
+      parameters:
+      - description: 코드 ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 공통 코드 삭제 완료
+      summary: 공통 코드 삭제
+      tags:
+      - Common Management
+    put:
+      operationId: updateCode
+      parameters:
+      - description: 코드 ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommonCode'
+        required: true
+      responses:
+        '200':
+          description: 공통 코드 수정 완료
+      summary: 공통 코드 수정
+      tags:
+      - Common Management
+  /contents:
+    post:
+      operationId: uploadContent
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ContentUpload'
+        required: true
+      responses:
+        '200':
+          description: 콘텐츠 업로드 완료
+      summary: 콘텐츠 업로드
+      tags:
+      - Content Management
+  /contents/request:
+    post:
+      operationId: requestDesiredContent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DesiredContentRequest'
+        required: true
+      responses:
+        '200':
+          description: 희망 콘텐츠 신청 완료
+      summary: 희망 콘텐츠 신청
+      tags:
+      - Content Management
+  /contents/{id}/categories:
+    put:
+      operationId: setContentCategories
+      parameters:
+      - description: 콘텐츠 ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentCategories'
+        required: true
+      responses:
+        '200':
+          description: 콘텐츠 분류 설정 완료
+      summary: 콘텐츠 분류 설정
+      tags:
+      - Content Management
+  /contents/{id}/modification-request:
+    put:
+      operationId: requestContentModification
+      parameters:
+      - description: 콘텐츠 ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ContentModificationRequest'
+        required: true
+      responses:
+        '200':
+          description: 콘텐츠 수정 요청 등록 완료
+      summary: 콘텐츠 수정 요청
+      tags:
+      - Content Management
+  /contents/{id}/review:
+    put:
+      operationId: reviewContent
+      parameters:
+      - description: 콘텐츠 ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentReview'
+        required: true
+      responses:
+        '200':
+          description: 콘텐츠 검수 완료
+      summary: 콘텐츠 검수 처리
+      tags:
+      - Content Management
+  /courses:
+    get:
+      operationId: getCourses
+      responses:
+        '200':
+          description: 성공적으로 교육과정 목록을 반환합니다.
+      summary: 교육과정 목록 조회
+      tags:
+      - Course Enrollment
+  /enrollments/draft:
+    post:
+      operationId: saveEnrollmentDraft
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrollmentDraft'
+        required: true
+      responses:
+        '200':
+          description: 임시 저장 완료
+      summary: 수강신청서 임시 저장
+      tags:
+      - Course Enrollment
+  /enrollments/status:
+    get:
+      operationId: getEnrollmentStatus
+      parameters:
+      - description: 수강신청자 ID
+        in: query
+        name: userId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 수강신청 상태 목록 반환
+      summary: 수강신청 상태 확인
+      tags:
+      - Course Enrollment
+  /enrollments/submit:
+    post:
+      operationId: submitEnrollment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrollmentSubmit'
+        required: true
+      responses:
+        '200':
+          description: 수강신청이 성공적으로 제출됨
+      summary: 수강신청서 최종 제출
+      tags:
+      - Course Enrollment
+  /enrollments/{id}/cancel:
+    post:
+      operationId: cancelEnrollment
+      parameters:
+      - description: 수강신청 ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 수강신청 취소 성공
+      summary: 수강신청 취소 요청
+      tags:
+      - Course Enrollment
+  /exams:
+    post:
+      operationId: createExam
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExamDefinition'
+        required: true
+      responses:
+        '200':
+          description: 시험 출제 완료
+      summary: 시험 출제
+      tags:
+      - Evaluation Management
+  /exams/statistics:
+    get:
+      operationId: getExamStatistics
+      parameters:
+      - description: 시험 ID
+        in: query
+        name: examId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 시험 통계 데이터 반환
+      summary: 시험 통계 조회
+      tags:
+      - Evaluation Management
+  /exams/{id}/autograde:
+    post:
+      operationId: autoGradeExam
+      parameters:
+      - description: 시험 ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 자동 채점 결과 반환
+      summary: 시험 자동 채점
+      tags:
+      - Evaluation Management
+  /exams/{id}/submit:
+    post:
+      operationId: submitExam
+      parameters:
+      - description: 시험 ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExamSubmission'
+        required: true
+      responses:
+        '200':
+          description: 시험 응시 제출 완료
+      summary: 시험 응시 제출
+      tags:
+      - Evaluation Management
+  /faqs:
+    get:
+      operationId: listFaqs
+      parameters:
+      - description: 검색 키워드
+        in: query
+        name: keyword
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: FAQ 목록 반환
+      summary: FAQ 목록 조회
+      tags:
+      - Portal Management
+    post:
+      operationId: createFaq
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Faq'
+        required: true
+      responses:
+        '200':
+          description: FAQ 등록 완료
+      summary: FAQ 등록
+      tags:
+      - Portal Management
+  /instructors/applications/{id}/status:
+    put:
+      operationId: updateInstructorApplicationStatus
+      parameters:
+      - description: 강사 신청 ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstructorApproval'
+        required: true
+      responses:
+        '200':
+          description: 강사 신청 상태 변경 완료
+      summary: 강사 승인 또는 반려 처리
+      tags:
+      - Portal Management
+  /instructors/apply:
+    post:
+      operationId: applyInstructor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstructorApplication'
+        required: true
+      responses:
+        '200':
+          description: 강사 등록 신청 완료
+      summary: 강사 등록 신청
+      tags:
+      - Portal Management
+  /instructors/assign:
+    post:
+      operationId: assignInstructor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstructorAssignment'
+        required: true
+      responses:
+        '200':
+          description: 강사 배정 완료
+      summary: 강사 배정
+      tags:
+      - Program Management
+  /instructors/search:
+    get:
+      operationId: searchInstructors
+      parameters:
+      - in: query
+        name: qualification
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: field
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: date
+        required: false
+        schema:
+          format: date
+          type: string
+      responses:
+        '200':
+          description: 검색된 강사 목록 반환
+      summary: 강사 검색
+      tags:
+      - Program Management
+  /instructors/{id}/history:
+    get:
+      operationId: getInstructorHistory
+      parameters:
+      - description: 강사 ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 강사 강의 이력 반환
+      summary: 강사 강의 이력 조회
+      tags:
+      - Portal Management
+  /integration/certificates/history:
+    post:
+      operationId: receiveCertificateHistory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                certificateId:
+                  type: string
+                issuedAt:
+                  format: date-time
+                  type: string
+                userId:
+                  type: string
+              required:
+              - certificateId
+              - userId
+              type: object
+        required: true
+      responses:
+        '200':
+          description: 이력 수신 완료
+      summary: 수료증 발급 이력 수신
+      tags:
+      - Integration Management
+  /integration/certificates/request:
+    post:
+      operationId: requestCertificateIssue
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                courseId:
+                  type: string
+                requestedAt:
+                  format: date-time
+                  type: string
+                userId:
+                  type: string
+              required:
+              - userId
+              - courseId
+              type: object
+        required: true
+      responses:
+        '200':
+          description: 신청 완료
+      summary: 수료증 신청 연계
+      tags:
+      - Integration Management
+  /integration/completions:
+    post:
+      operationId: sendCompletionRecord
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                completedAt:
+                  format: date-time
+                  type: string
+                courseId:
+                  type: string
+                userId:
+                  type: string
+              required:
+              - userId
+              - courseId
+              - completedAt
+              type: object
+        required: true
+      responses:
+        '200':
+          description: 전송 성공
+      summary: 교육수료 정보 외부 전송
+      tags:
+      - Integration Management
+  /integration/courses/sync:
+    post:
+      operationId: syncExternalCourse
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                courseName:
+                  type: string
+                duration:
+                  type: string
+                externalCourseId:
+                  type: string
+                provider:
+                  type: string
+              required:
+              - externalCourseId
+              - courseName
+              type: object
+        required: true
+      responses:
+        '200':
+          description: 연계 성공
+      summary: 외부 교육과정 정보 연계
+      tags:
+      - Integration Management
+  /integration/members/sync:
+    post:
+      operationId: syncMemberInfo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                externalSystem:
+                  type: string
+                memberId:
+                  type: string
+                syncedAt:
+                  format: date-time
+                  type: string
+              required:
+              - memberId
+              - externalSystem
+              type: object
+        required: true
+      responses:
+        '200':
+          description: 연계 성공
+      summary: 통합회원 정보 연계 동기화
+      tags:
+      - Integration Management
+  /members/profile:
+    put:
+      operationId: updateMemberProfile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemberProfile'
+        required: true
+      responses:
+        '200':
+          description: 회원정보 수정 성공
+      summary: 회원정보 수정
+      tags:
+      - Member Signup
+  /members/profile/history:
+    get:
+      operationId: getMemberProfileHistory
+      parameters:
+      - description: 회원 ID
+        in: query
+        name: userId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 회원정보 수정 이력 반환
+      summary: 회원정보 수정 이력 조회
+      tags:
+      - Member Signup
+  /members/signup/agreements:
+    post:
+      operationId: submitAgreements
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgreementInfo'
+        required: true
+      responses:
+        '200':
+          description: 약관 동의 저장 완료
+      summary: 약관 동의 저장
+      tags:
+      - Member Signup
+  /members/signup/basic-info:
+    post:
+      operationId: submitBasicInfo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BasicInfo'
+        required: true
+      responses:
+        '200':
+          description: 기본정보 저장 완료
+      summary: 기본정보 입력
+      tags:
+      - Member Signup
+  /members/signup/complete:
+    get:
+      operationId: getSignupCompleteInfo
+      responses:
+        '200':
+          description: 회원가입 완료 메시지 반환
+      summary: 회원가입 완료 정보 조회
+      tags:
+      - Member Signup
+  /members/signup/types:
+    get:
+      operationId: getSignupTypes
+      responses:
+        '200':
+          description: 회원유형 목록 반환
+      summary: 회원유형 목록 조회
+      tags:
+      - Member Signup
+  /members/signup/verification:
+    post:
+      operationId: verifyIdentity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerificationRequest'
+        required: true
+      responses:
+        '200':
+          description: 본인인증 성공 또는 실패
+      summary: 본인인증 요청
+      tags:
+      - Member Signup
+  /mypage:
+    get:
+      operationId: getMyPage
+      parameters:
+      - description: 사용자 ID
+        in: query
+        name: userId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 마이페이지 정보 반환
+      summary: 마이페이지 조회
+      tags:
+      - Portal Management
+  /notices:
+    get:
+      operationId: listNotices
+      parameters:
+      - description: 검색 키워드
+        in: query
+        name: keyword
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 공지사항 목록 반환
+      summary: 공지사항 목록 조회
+      tags:
+      - Portal Management
+    post:
+      operationId: createNotice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Notice'
+        required: true
+      responses:
+        '200':
+          description: 공지사항 등록 완료
+      summary: 공지사항 등록
+      tags:
+      - Portal Management
+  /notifications/sms:
+    post:
+      operationId: sendSms
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SmsRequest'
+        required: true
+      responses:
+        '200':
+          description: SMS 발송 요청 완료
+      summary: SMS 발송 요청
+      tags:
+      - Common Management
+  /notifications/sms/history:
+    get:
+      operationId: getSmsHistory
+      parameters:
+      - description: 수신자 전화번호
+        in: query
+        name: phoneNumber
+        required: false
+        schema:
+          type: string
+      - description: 발송 일자
+        in: query
+        name: date
+        required: false
+        schema:
+          format: date
+          type: string
+      responses:
+        '200':
+          description: SMS 발송 이력 반환
+      summary: SMS 발송 이력 조회
+      tags:
+      - Common Management
+  /payments/enrollments:
+    post:
+      operationId: processEnrollmentPayment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrollmentPayment'
+        required: true
+      responses:
+        '200':
+          description: 결제 처리 완료
+      summary: 수강신청 결제 처리
+      tags:
+      - Settlement Management
+  /payments/enrollments/{id}/refund:
+    post:
+      operationId: requestEnrollmentRefund
+      parameters:
+      - description: 수강신청 ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefundRequest'
+        required: true
+      responses:
+        '200':
+          description: 환불 요청 및 처리 완료
+      summary: 수강신청 환불 요청 및 처리
+      tags:
+      - Settlement Management
+  /permissions:
+    post:
+      operationId: requestPermission
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PermissionRequest'
+        required: true
+      responses:
+        '200':
+          description: 권한 설정 요청 완료
+      summary: 권한 설정 요청
+      tags:
+      - Common Management
+  /permissions/{id}/status:
+    put:
+      operationId: processPermissionStatus
+      parameters:
+      - description: 권한 요청 ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PermissionApproval'
+        required: true
+      responses:
+        '200':
+          description: 권한 상태 변경 완료
+      summary: 권한 승인/반려 처리
+      tags:
+      - Common Management
+  /programs:
+    post:
+      operationId: createProgram
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Program'
+        required: true
+      responses:
+        '200':
+          description: 교육 프로그램 등록 완료
+      summary: 교육 프로그램 등록
+      tags:
+      - Program Management
+  /programs/{id}/deactivate:
+    post:
+      operationId: deactivateProgram
+      parameters:
+      - description: 프로그램 ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                reason:
+                  type: string
+              required:
+              - reason
+              type: object
+        required: true
+      responses:
+        '200':
+          description: 폐지 처리 완료
+      summary: 교육 프로그램 폐지 요청
+      tags:
+      - Program Management
+  /programs/{id}/mixed-mode:
+    post:
+      operationId: setMixedModeProgram
+      parameters:
+      - description: 프로그램 ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MixedModeSettings'
+        required: true
+      responses:
+        '200':
+          description: 혼합교육 설정 완료
+      summary: 혼합교육 운영 설정
+      tags:
+      - Program Management
+  /programs/{id}/schedule:
+    post:
+      operationId: setProgramSchedule
+      parameters:
+      - description: 프로그램 ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProgramSchedule'
+        required: true
+      responses:
+        '200':
+          description: 일정 설정 완료
+      summary: 교육 프로그램 일정 설정
+      tags:
+      - Program Management
+  /reservations:
+    post:
+      operationId: createReservation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+        required: true
+      responses:
+        '200':
+          description: 대관 신청이 성공적으로 등록됨
+      summary: 대관 신청 등록
+      tags:
+      - Facility Management
+  /reservations/status:
+    get:
+      operationId: getReservationStatus
+      parameters:
+      - description: 조회 기준 날짜
+        in: query
+        name: date
+        required: false
+        schema:
+          format: date
+          type: string
+      - description: 강의실 ID
+        in: query
+        name: roomId
+        required: false
+        schema:
+          type: string
+      - description: 예약 상태 필터
+        in: query
+        name: status
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 대관 이용현황 반환
+      summary: 대관 이용현황 조회
+      tags:
+      - Facility Management
+  /reservations/{id}/status:
+    put:
+      operationId: processReservationStatus
+      parameters:
+      - description: 대관 예약 ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReservationStatusUpdate'
+        required: true
+      responses:
+        '200':
+          description: 대관 상태 변경 완료
+      summary: 대관 예약 승인 또는 반려 처리
+      tags:
+      - Facility Management
+  /rooms:
+    post:
+      operationId: registerRoom
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoomInfo'
+        required: true
+      responses:
+        '200':
+          description: 강의실 등록 완료
+      summary: 강의실 정보 등록
+      tags:
+      - Facility Management
+  /rooms/{id}/location:
+    get:
+      operationId: getRoomLocation
+      parameters:
+      - description: 강의실 ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 강의실 위치 정보 반환
+      summary: 강의실 위치 정보 제공
+      tags:
+      - Facility Management
+  /rooms/{id}/usage-info:
+    put:
+      operationId: setRoomUsageInfo
+      parameters:
+      - description: 강의실 ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoomUsageInfo'
+        required: true
+      responses:
+        '200':
+          description: 강의실 이용안내 설정 완료
+      summary: 강의실 이용안내 설정
+      tags:
+      - Facility Management
+  /settlements/instructors:
+    post:
+      operationId: registerInstructorSettlement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstructorSettlement'
+        required: true
+      responses:
+        '200':
+          description: 강사비 정산 등록 완료
+      summary: 강사비 정산 등록
+      tags:
+      - Settlement Management
+  /surveys:
+    post:
+      operationId: createSurvey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SurveyDefinition'
+        required: true
+      responses:
+        '200':
+          description: 설문 등록 완료
+      summary: 설문 등록
+      tags:
+      - Evaluation Management
+  /surveys/{id}/responses:
+    post:
+      operationId: submitSurveyResponse
+      parameters:
+      - description: 설문 ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SurveyResponse'
+        required: true
+      responses:
+        '200':
+          description: 설문 응답 제출 완료
+      summary: 설문 응답 제출
+      tags:
+      - Evaluation Management
+  /system-config/ui-elements:
+    post:
+      operationId: registerUiElement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UiElement'
+        required: true
+      responses:
+        '200':
+          description: UI 요소 등록 완료
+      summary: UI 요소(메뉴/팝업/약관) 등록
+      tags:
+      - Common Management
+servers:
+- description: 운영 서버
+  url: https://api.example.com
+tags:
+- name: Course Enrollment
+- name: Member Signup
+- name: Program Management
+- name: Content Management
+- name: Facility Management
+- name: Evaluation Management
+- name: Portal Management
+- name: Common Management
+- name: Settlement Management
+- name: Integration Management
