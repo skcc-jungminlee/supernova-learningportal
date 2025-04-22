@@ -149,7 +149,7 @@
                             <apiPackage>supernova.learningportal.api</apiPackage>
                             <modelPackage>supernova.learningportal.dto</modelPackage>
                             <configOptions>
-                                <interfaceOnly>true</interfaceOnly>
+                                <interfaceOnly>false</interfaceOnly>
                                 <useSpringController>true</useSpringController>
                                 <useTags>true</useTags>
                                 <useJakartaEe>true</useJakartaEe>
